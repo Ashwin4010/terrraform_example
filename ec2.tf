@@ -1,4 +1,4 @@
-resource "aws_instance" "Terraform_instance" {
+/*resource "aws_instance" "Terraform_instance" {
   ami           = "ami-007020fd9c84e18c7"
   instance_type = "t2.micro"
   subnet_id     = "subnet-0fc24d3949e171bcf"
@@ -10,3 +10,4 @@ resource "aws_instance" "Terraform_instance" {
     Name = "my_Terra_instance"
   }
 }
+*/
