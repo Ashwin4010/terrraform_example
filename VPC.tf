@@ -20,7 +20,7 @@ resource "aws_vpc" "bruh_VPC" {
 resource "aws_subnet" "public_subnet" {
   vpc_id     = aws_vpc.bruh_VPC.id
   cidr_block = "123.0.1.0/24"
-  availability_zone="ap-south-1"
+  availability_zone="ap-south-1b"
   tags = {
     Name = "public subnet bruh"
   }
@@ -28,7 +28,7 @@ resource "aws_subnet" "public_subnet" {
 resource "aws_subnet" "private_subnet" {
   vpc_id     = aws_vpc.bruh_VPC.id
   cidr_block = "123.0.2.0/24"
-  availability_zone="ap-south-1"
+  availability_zone="ap-south-1b"
   tags = {
     Name = "private subnet bruh"
   }
@@ -150,7 +150,7 @@ resource "aws_security_group" "private_sg" {
 resource "aws_instance" "bruh_public_instance" {
   ami                                             = "ami-007020fd9c84e18c7"
   instance_type                                   = "t2.micro"
-  #availability_zone                               = "ap-south-1a"
+  availability_zone                               = "ap-south-1a"
   associate_public_ip_address                     = "true"
   vpc_security_group_ids                          = [aws_security_group.public_sg.id]
   subnet_id                                       = aws_subnet.public_subnet.id
@@ -163,7 +163,7 @@ resource "aws_instance" "bruh_public_instance" {
 resource "aws_instance" "bruh_private_instance" {
   ami                                             = "ami-007020fd9c84e18c7"
   instance_type                                   = "t2.micro"
-  #availability_zone                               = "ap-south-1a"
+  availability_zone                               = "ap-south-1a"
   associate_public_ip_address                     = "false"
   vpc_security_group_ids                          = [aws_security_group.private_sg.id]
   subnet_id                                       = aws_subnet.private_subnet.id
