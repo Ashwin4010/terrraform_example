@@ -18,7 +18,7 @@ resource "aws_vpc" "bruh_VPC" {
   }
 }
 resource "aws_subnet" "public_subnet" {
-  vpc_id     = aws_vpc.bruh_vpc.id
+  vpc_id     = aws_vpc.bruh_VPC.id
   cidr_block = "123.0.1.0/24"
   availability_zone="ap-south-1"
   tags = {
@@ -26,7 +26,7 @@ resource "aws_subnet" "public_subnet" {
   }
 }
 resource "aws_subnet" "private-subnet" {
-  vpc_id     = aws_vpc.bruh_vpc.id
+  vpc_id     = aws_vpc.bruh_VPC.id
   cidr_block = "123.0.2.0/24"
   availability_zone="ap-south-1"
   tags = {
