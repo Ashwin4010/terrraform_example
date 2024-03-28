@@ -9,7 +9,7 @@ terraform {
 provider "aws" {
   region = "ap-south-1"
 }
-resource "aws_vpc" "bruh-VPC" {
+resource "aws_vpc" "bruh_VPC" {
   cidr_block       = "123.0.0.0/16"
   instance_tenancy = "default"
 
@@ -17,7 +17,7 @@ resource "aws_vpc" "bruh-VPC" {
     Name = "bruh-VPC"
   }
 }
-resource "aws_subnet" "public-subnet" {
+resource "aws_subnet" "public_subnet" {
   vpc_id     = aws_vpc.myvpc.id
   cidr_block = "123.0.1.0/24"
   availability_zone="ap-south-1"
@@ -34,7 +34,7 @@ resource "aws_subnet" "private-subnet" {
   }
 }
 resource "aws_internet_gateway" "internet-gateway" {
-  vpc_id = aws_vpc.bruh-VPC.id
+  vpc_id = aws_vpc.bruh_VPC.id
 
   tags = {
     Name = "internet-gateway"
@@ -45,14 +45,14 @@ resource "aws_eip" "my_eip" {
 }
 resource "aws_nat_gateway" "my_nat_gw" {
   allocation_id = aws_eip.my_eip.id
-  subnet_id     = aws_subnet.public-subnet.id
+  subnet_id     = aws_subnet.public_subnet.id
 
   tags = {
     Name = "my_nat_gw"
   }
 }
 resource "aws_route_table" "public_route_table" {
-  vpc_id = aws_vpc.bruh-VPC.id
+  vpc_id = aws_vpc.bruh_VPC.id
 
   route {
     cidr_block = "0.0.0.0/0"
@@ -64,11 +64,11 @@ resource "aws_route_table" "public_route_table" {
   }
 }
 resource "aws_route_table_association" "public_subnet_association" {
-  subnet_id      = aws_subnet.public-subnet.id
+  subnet_id      = aws_subnet.public_subnet.id
   route_table_id = aws_route_table.public_route_table.id
 }
 resource "aws_route_table" "private_route_table" {
-  vpc_id = aws_vpc.bruh-VPC.id
+  vpc_id = aws_vpc.bruh_VPC.id
 
   route {
     cidr_block = "0.0.0.0/0"
@@ -80,13 +80,13 @@ resource "aws_route_table" "private_route_table" {
   }
 }
 resource "aws_route_table_association" "private_subnet_association" {
-  subnet_id      = aws_subnet.private-subnet.id
+  subnet_id      = aws_subnet.private_subnet.id
   route_table_id = aws_route_table.private_route_table.id
 }
 resource "aws_security_group" "public_sg" {
   name        = "allow_web"
   description = "Allow web inbound traffic"
-  vpc_id      = aws_vpc.bruh-VPC.id
+  vpc_id      = aws_vpc.bruh_VPC.id
 
   ingress {
     from_port   = 80
@@ -126,14 +126,14 @@ resource "aws_security_group" "public_sg" {
 resource "aws_security_group" "private_sg" {
   name        = "private sg"
   description = "Allow TLS inbound traffic from public subnet"
-  vpc_id      = aws_vpc.bruh-VPC.id
+  vpc_id      = aws_vpc.bruh_VPC.id
 
   ingress {
     description      = "TLS from VPC"
     from_port        = 0
     to_port          = 65535
     protocol         = "tcp"
-    cidr_blocks      = ["10.0.1.0/24"]
+    cidr_blocks      = ["123.0.1.0/24"]
   }
 
   egress {
@@ -153,7 +153,7 @@ resource "aws_instance" "bruh_pulic instance" {
   availability_zone                               = "ap-south-1"
   associate_public_ip_address                     = "true"
   vpc_security_group_ids                          = [aws_security_group.public_sg.id]
-  subnet_id                                       = aws_subnet.public-subnet.id
+  subnet_id                                       = aws_subnet.public_subnet.id
   key_name                                        = "jenkins_2"
 
     tags = {
@@ -166,7 +166,7 @@ resource "aws_instance" "bruh_pulic instance" {
   availability_zone                               = "ap-south-1"
   associate_public_ip_address                     = "false"
   vpc_security_group_ids                          = [aws_security_group.private_sg.id]
-  subnet_id                                       = aws_subnet.private-subnet.id
+  subnet_id                                       = aws_subnet.private_subnet.id
   key_name                                        = "jenkins_2"
 
     tags = {
