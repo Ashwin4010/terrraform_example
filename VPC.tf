@@ -147,7 +147,7 @@ resource "aws_security_group" "private_sg" {
     Name = "private security group for bruh vpc"
   }
 }
-resource "aws_instance" "bruh_pulic instance" {
+resource "aws_instance" "bruh_public_instance" {
   ami                                             = "ami-007020fd9c84e18c7"
   instance_type                                   = "t2.micro"
   availability_zone                               = "ap-south-1"
@@ -160,7 +160,7 @@ resource "aws_instance" "bruh_pulic instance" {
     Name = "public instance"
   }
 }
-resource "aws_instance" "bruh_pulic instance" {
+resource "aws_instance" "bruh_private_instance" {
   ami                                             = "ami-007020fd9c84e18c7"
   instance_type                                   = "t2.micro"
   availability_zone                               = "ap-south-1"
