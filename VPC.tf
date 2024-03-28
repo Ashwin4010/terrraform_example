@@ -41,7 +41,7 @@ resource "aws_internet_gateway" "internet-gateway" {
   }
 }
 resource "aws_eip" "my_eip" {
-  vpc = true
+  domain = "vpc"
 }
 resource "aws_nat_gateway" "my_nat_gw" {
   allocation_id = aws_eip.my_eip.id
