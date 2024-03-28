@@ -25,7 +25,7 @@ resource "aws_subnet" "public_subnet" {
     Name = "public subnet bruh"
   }
 }
-resource "aws_subnet" "private-subnet" {
+resource "aws_subnet" "private_subnet" {
   vpc_id     = aws_vpc.bruh_VPC.id
   cidr_block = "123.0.2.0/24"
   availability_zone="ap-south-1"
