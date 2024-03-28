@@ -11,7 +11,7 @@ provider "aws" {
   }
 
 resource "aws_s3_bucket" "terra_ashwin_sample" {
-  bucket = "super_unique_name_for_bucket_ashwin"
+  bucket = "super-unique-bucket-name-by-ashwin4010"
 
   tags = {
     Name        = "My bucket"
