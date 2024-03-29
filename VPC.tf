@@ -142,33 +142,30 @@ resource "aws_security_group" "private_sg" {
     protocol         = "-1"
     cidr_blocks      = ["0.0.0.0/0"]
   }
-
   tags = {
     Name = "private security group for bruh vpc"
   }
 }
 resource "aws_instance" "bruh_public_instance" {
-  ami                                             = "ami-007020fd9c84e18c7"
-  instance_type                                   = "t2.micro"
-  availability_zone                               = "ap-south-1b"
-  associate_public_ip_address                     = "true"
-  vpc_security_group_ids                          = [aws_security_group.public_sg.id]
-  subnet_id                                       = aws_subnet.public_subnet.id
-  key_name                                        = "jenkins_2"
-
+  ami = "ami-007020fd9c84e18c7"
+  instance_type = "t2.micro"
+  availability_zone = "ap-south-1b"
+  associate_public_ip_address = "true"
+  vpc_security_group_ids = [aws_security_group.public_sg.id]
+  subnet_id = aws_subnet.public_subnet.id
+  key_name = "jenkins_2"
     tags = {
     Name = "public instance"
   }
 }
 resource "aws_instance" "bruh_private_instance" {
-  ami                                             = "ami-007020fd9c84e18c7"
-  instance_type                                   = "t2.micro"
-  availability_zone                               = "ap-south-1b"
-  associate_public_ip_address                     = "false"
-  vpc_security_group_ids                          = [aws_security_group.private_sg.id]
-  subnet_id                                       = aws_subnet.private_subnet.id
-  key_name                                        = "jenkins_2"
-
+  ami = "ami-007020fd9c84e18c7"
+  instance_type = "t2.micro"
+  availability_zone =  "ap-south-1b"
+  associate_public_ip_address =  "false"
+  vpc_security_group_ids = [aws_security_group.private_sg.id]
+  subnet_id = aws_subnet.private_subnet.id
+  key_name = "jenkins_2"
     tags = {
     Name = "private instance"
   }
