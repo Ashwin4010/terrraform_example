@@ -10,11 +10,11 @@ resource "aws_db_instance" "my_mysql_db" {
   instance_class       = "db.t2.micro"
   identifier           = "my-rds-instance"
   name                 = "mydb"
-  username             = "<username>"
-  password             = "<password>"
-  parameter_group_name = "default.mysql5.7"
+  username             = "kuaran_rds"
+  password             = "kumaran123"
+  #parameter_group_name = "default.mysql5.7"
   publicly_accessible  = true
-  vpc_security_group_ids = ["<security group id>"]
+  vpc_security_group_ids = ["sg-0f1e0c4db1816fed2"]
   db_subnet_group_name = "my-db-subnet-group"
   skip_final_snapshot  = true
 }
@@ -27,7 +27,7 @@ resource "aws_db_subnet_group" "my_db_subnet_group" {
 resource "aws_security_group" "my_rds_sg" {
   name        = "my-rds-sg"
   description = "Security group for RDS DB Instance"
-  vpc_id      = "vpc-xxxxxxxxxxxx"
+  vpc_id      = "vpc-0288d143bdd659b88"
 
   ingress {
     from_port   = 3306
