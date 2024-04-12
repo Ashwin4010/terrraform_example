@@ -10,8 +10,8 @@ resource "aws_db_instance" "my_mysql_db" {
   instance_class       = "db.t2.micro"
   identifier           = "my-rds-instance"
   name                 = "mydb"
-  username             = "kuaran_rds"
-  password             = "kumaran123"
+  username             = "admin"
+  password             = "admin123"
   #parameter_group_name = "default.mysql5.7"
   publicly_accessible  = true
   vpc_security_group_ids = ["sg-0f1e0c4db1816fed2"]
